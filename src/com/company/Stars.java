@@ -1,31 +1,48 @@
 package com.company;
 
 public class Stars {
+    // ======== INSTANCE VARIABLES ========
     private int numberOfStars = 0;
 
-    Stars() {
+    // ======== CONSTRUCTORS ========
+    public Stars() {
     }
 
-    void addStar() {
-        ++numberOfStars;
+    /*
+     * Increments the current number of stars by 1.
+     */
+    public void addStar() {
+        numberOfStars++;
     }
 
-    void removeStar() {
-        --numberOfStars;
+    /*
+     * Decrements the current number of stars by 1, then sets it to 0 if the resulting integer is less than 0.
+     */
+    public void removeStar() {
+        numberOfStars--;
         if (numberOfStars < 0) {
             numberOfStars = 0;
         }
 
     }
 
+    /*
+     * Returns the remainder of n / 5, where n represents the current number of stars
+     */
     private int starsMod5() {
         return numberOfStars % 5;
     }
 
+    /*
+     * Returns the remainder of n / 10, where n represents the current number of stars
+     */
     private int starsMod10() {
         return numberOfStars % 10;
     }
 
+    /*
+     * Returns the number of groups of five stars each that can be made with the current number of stars.
+     */
     private int groupsOf5Stars() {
         if (numberOfStars >= 5 && starsMod10() == 5) {
             return 1;
@@ -40,22 +57,16 @@ public class Stars {
         }
     }
 
+    /*
+     * Returns the number of groups of ten stars each that can be made with the current number of stars.
+     */
     private int groupsOf10Stars() {
         return (numberOfStars - starsMod10()) / 10;
     }
 
-    public void debugMode(int upper) {
-        GameMethods gm = new GameMethods();
-        String msg = "";
-
-        for(int i = 0; i < upper; ++i) {
-            numberOfStars = i + 1;
-            msg = msg + (i + 1) + " stars: " + toString() + "\n";
-        }
-
-        gm.say(msg);
-    }
-
+    /*
+     * Returns a String representing the current star inventory.
+     */
     public String toString() {
         String msg = "";
         int remainder = starsMod5();
